@@ -1,11 +1,14 @@
 
 package com.mycompany.clasesdesarrollo;
 // Clase principal Empleado
+
+import javax.swing.JOptionPane;
+
 public class Employees {
-    private String name;
-    private String id;
-    private double baseSalary;
-    private int hoursWorked;
+    public String name;
+    public String id;
+    public double baseSalary;
+    public int hoursWorked;
 
     public Employees(String name, String id, double baseSalary, int hoursWorked) {
         this.name = name;
@@ -14,9 +17,9 @@ public class Employees {
         this.hoursWorked = hoursWorked;
     }
 
-    public double calculateSalary() {
-        
-        return 0;
+    public static void calculateSalary(double baseSalary,int hoursWorked) {
+    double salary = hoursWorked * baseSalary;
+    JOptionPane.showMessageDialog(null, "The Final salary is: $" + salary);
     }
 }
 

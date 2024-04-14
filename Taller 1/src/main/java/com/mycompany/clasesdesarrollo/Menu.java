@@ -19,7 +19,7 @@ public class Menu extends javax.swing.JFrame {
      */
     public Menu() {
         initComponents();
-        setTitle("Menú de Empleado");
+        setTitle("Employees Menu");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -49,6 +49,8 @@ public class Menu extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(800, 600));
@@ -96,6 +98,15 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("Calculate");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("Final Salary");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -110,11 +121,15 @@ public class Menu extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField2)
                             .addComponent(jTextField3)
-                            .addComponent(jTextField4)))
+                            .addComponent(jTextField1)
+                            .addComponent(jTextField4))
+                        .addGap(97, 97, 97)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton2)
+                            .addComponent(jLabel8)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(70, 70, 70)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,7 +146,7 @@ public class Menu extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(343, 343, 343)
                         .addComponent(jButton1)))
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addGap(106, 106, 106))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,11 +154,13 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -164,7 +181,7 @@ public class Menu extends javax.swing.JFrame {
                     .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(103, 103, 103)
                 .addComponent(jButton1)
-                .addContainerGap(179, Short.MAX_VALUE))
+                .addContainerGap(178, Short.MAX_VALUE))
         );
 
         jLabel1.getAccessibleContext().setAccessibleName("jLable1");
@@ -204,9 +221,19 @@ public class Menu extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        String name = jTextField1.getText();
        String ID = jTextField2.getText();
-       String Base_Salary= jTextField3.getText();
-       String Hours_Worked = jTextField4.getText();
+       String baseSalary= jTextField3.getText();
+       String hoursWorked = jTextField4.getText();
        
+       String seleccion = (String) jComboBox3.getSelectedItem();
+       if (seleccion.equals("assignTask")) {
+       Manager.assignTask();
+       }
+       else if(seleccion.equals("submitProposals")){
+       GraphicDesigner.submitProposals();
+       }
+       else if(seleccion.equals("provideAdvice")){
+       SupportTechnician.provideAdvice();
+       }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
@@ -218,51 +245,57 @@ public class Menu extends javax.swing.JFrame {
     
         // Verificar la selección del JComboBox1 y agregar opciones al JComboBox2 correspondiente
         switch (seleccion) {
-            case "Manager":
+            case "Manager" -> {
                 // Si se selecciona "Tiempo Completo", agregar las siguientes opciones al JComboBox2
                 jComboBox3.addItem("assignTask");
                 jComboBox3.addItem("manageTeam");
                 jComboBox3.addItem("makeReport");
-                break;
-            case "Secretary":
+            }
+            case "Secretary" -> {
                 jComboBox3.addItem("manageAgenda");
                 jComboBox3.addItem("writeCorrespondence");
                 jComboBox3.addItem("organizeDocuments");
-                break;
-            case "SupportTechnician":
+            }
+            case "SupportTechnician" -> {
                 jComboBox3.addItem("solveIncidents");
                 jComboBox3.addItem("softwareUpdate");
                 jComboBox3.addItem("provideAdvice");
-                break;
-            case "SoftwareEngineer":
+            }
+            case "SoftwareEngineer" -> {
                 jComboBox3.addItem("developSoftware");
                 jComboBox3.addItem("makeTest");
                 jComboBox3.addItem("mantainSystems");
-                break;
-            case "AdministrativeAssistant":
+            }
+            case "AdministrativeAssistant" -> {
                 jComboBox3.addItem("manageDocumentation");
                 jComboBox3.addItem("coodinateMeetings");
                 jComboBox3.addItem("takeCalls");
-                break;
-            case "DataAnalizer":
+            }
+            case "DataAnalizer" -> {
                 jComboBox3.addItem("analizeData");
                 jComboBox3.addItem("generateAnalisisReports");
                 jComboBox3.addItem("developPredictiveMethods");
-                break;
-            case "FinancialAdvisor":
+            }
+            case "FinancialAdvisor" -> {
                 jComboBox3.addItem("adviceCostumers");
                 jComboBox3.addItem("makeMarketAnalisis");
                 jComboBox3.addItem("prepareFinancialReports");
-                break;
-            case "GraphicDesigner":
+            }
+            case "GraphicDesigner" -> {
                 jComboBox3.addItem("designVisualMaterial");
                 jComboBox3.addItem("creativeProjectColaboration");
                 jComboBox3.addItem("submitProposals");
-                break;
-            default:
-                break;
+            }
+            default -> {
+            }
         }
     }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        double baseSalary = Double.parseDouble(jTextField3.getText());
+        int hoursWorked = Integer.parseInt(jTextField4.getText());
+        Employees.calculateSalary(baseSalary,hoursWorked);       
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -302,6 +335,7 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
@@ -312,6 +346,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
