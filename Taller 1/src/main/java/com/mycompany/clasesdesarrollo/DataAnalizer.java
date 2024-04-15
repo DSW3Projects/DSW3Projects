@@ -4,6 +4,8 @@
  */
 package com.mycompany.clasesdesarrollo;
 
+import javax.swing.JOptionPane;
+
 public class DataAnalizer extends HalfTime {
     private String especialty;
 
@@ -12,8 +14,10 @@ public class DataAnalizer extends HalfTime {
         this.especialty = especialty;
     }
 
-    public void analizeData() {
-        
+    public static void analizeData() {
+      String AmountOfData = JOptionPane.showInputDialog("Amount of data to analyze (please, in gigabytes): ");
+      JOptionPane.showMessageDialog(null, "The amount of data that you are going to analize is " + AmountOfData);
+    
     }
 
     public void generateAnalisisReports() {

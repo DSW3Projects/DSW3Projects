@@ -190,25 +190,22 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-                                          
-    // Limpiar el JComboBox2 antes de agregar nuevas opciones
+
     jComboBox2.removeAllItems();
-    
-    // Obtener la selección del JComboBox1
     String seleccion = (String) jComboBox1.getSelectedItem();
-    
-    // Verificar la selección del JComboBox1 y agregar opciones al JComboBox2 correspondiente
     if (seleccion.equals("FullTime")) {
-        // Si se selecciona "Tiempo Completo", agregar las siguientes opciones al JComboBox2
         jComboBox2.addItem("Manager");
         jComboBox2.addItem("Secretary");
         jComboBox2.addItem("SupportTechnician");
         jComboBox2.addItem("SoftwareEngineer");
+        jComboBox2.addItem("Accountant");
+        jComboBox2.addItem("SecurityAnalist");
     } else if (seleccion.equals("PartTime")) {
         jComboBox2.addItem("AdministrativeAssistant");
         jComboBox2.addItem("DataAnalizer");
         jComboBox2.addItem("FinancialAdvisor");
         jComboBox2.addItem("GraphicDesigner");
+        jComboBox2.addItem("Janitor");
     }
     
 
@@ -234,20 +231,35 @@ public class Menu extends javax.swing.JFrame {
        else if(seleccion.equals("provideAdvice")){
        SupportTechnician.provideAdvice();
        }
+       else if(seleccion.equals("developSoftware")){
+       SoftwareEngineer.developSoftware();
+       }
+       else if(seleccion.equals("analizeData")){
+        DataAnalizer.analizeData();
+       }
+       else if(seleccion.equals("writeCorrespondence")){
+       Secretary.writeCorrespondence();
+       }
+       else if(seleccion.equals("prepareFinancialReports")){
+       FinalcialAdvisor.prepareFinancialReports();
+       }
+       else if(seleccion.equals("takeCalls")){
+       AdministrativeAssistant.takeCalls();
+       }
+       else if(seleccion.equals("requestVacation")){
+       FullTime.requestVacation();
+       }
+       else if(seleccion.equals("requestPermision")){
+       HalfTime.requestPermision();
+       }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        // Limpiar el JComboBox2 antes de agregar nuevas opciones
+
     jComboBox3.removeAllItems();
-    
-    // Obtener la selección del JComboBox1
     String seleccion = (String) jComboBox2.getSelectedItem();
-    
-        // Verificar la selección del JComboBox1 y agregar opciones al JComboBox2 correspondiente
         switch (seleccion) {
             case "Manager" -> {
-                // Si se selecciona "Tiempo Completo", agregar las siguientes opciones al JComboBox2
-                
                 jComboBox3.addItem("requestVacation");
                 jComboBox3.addItem("registerAssitant");
                 jComboBox3.addItem("reciveBonus");
@@ -310,6 +322,30 @@ public class Menu extends javax.swing.JFrame {
                 jComboBox3.addItem("designVisualMaterial");
                 jComboBox3.addItem("creativeProjectColaboration");
                 jComboBox3.addItem("submitProposals");
+            }
+            case "Accountant" -> {
+                jComboBox3.addItem("requestVacation");
+                jComboBox3.addItem("registerAssitant");
+                jComboBox3.addItem("reciveBonus");
+                jComboBox3.addItem("registerIncome");
+                jComboBox3.addItem("registarExpenses");
+                jComboBox3.addItem("auditBooks");
+            }
+            case "SecurityAnalist" -> {
+                jComboBox3.addItem("requestVacation");
+                jComboBox3.addItem("registerAssitant");
+                jComboBox3.addItem("reciveBonus");
+                jComboBox3.addItem("securityMonitoring");
+                jComboBox3.addItem("analizeVulnerabilities");
+                jComboBox3.addItem("incidentDetection");
+            }
+            case "Janitor" -> {
+                jComboBox3.addItem("requestVacation");
+                jComboBox3.addItem("registerAssitant");
+                jComboBox3.addItem("reciveBonus");
+                jComboBox3.addItem("cleanAisles");
+                jComboBox3.addItem("collectGarbage");
+                jComboBox3.addItem("removeLitter");
             }
             default -> {
             }

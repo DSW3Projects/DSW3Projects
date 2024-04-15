@@ -14,11 +14,10 @@ public class FullTime extends Employees {
         super(name, id, baseSalary, hoursWorked);
     }
 
-    public void requestVacation(String name) {
-     this.name = name;   
+    public static void requestVacation() {   
     String startDate = JOptionPane.showInputDialog(null, "Enter the initial date for vacation in this format (DD/MM/AAAA):");   
     String endDate = JOptionPane.showInputDialog(null, "Enter the final date for vacation in this format (DD/MM/AAAA):");
-    JOptionPane.showMessageDialog(null, "Vacation request by  " + name + " from " + startDate + " to " + endDate + ".");
+    JOptionPane.showMessageDialog(null, "Vacation request from " + startDate + " to " + endDate + ".");
         
     }
 

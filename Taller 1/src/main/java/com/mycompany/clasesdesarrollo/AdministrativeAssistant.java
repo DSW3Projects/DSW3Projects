@@ -4,6 +4,8 @@
  */
 package com.mycompany.clasesdesarrollo;
 
+import javax.swing.JOptionPane;
+
 public class AdministrativeAssistant extends HalfTime {
     public AdministrativeAssistant(String name, String id, double baseSalary, int hoursWorked) {
         super(name, id, baseSalary, hoursWorked);
@@ -17,7 +19,16 @@ public class AdministrativeAssistant extends HalfTime {
         
     }
 
-    public void takeCalls() {
-        
+    public static void takeCalls() {
+        int numCalls = Integer.parseInt(JOptionPane.showInputDialog("Enter the number of calls:"));
+        for (int i = 1; i <= numCalls; i++) {
+            String urgencyLevel = JOptionPane.showInputDialog("Enter the urgency level of call " + i + " (Low, Medium, High):");
+            switch (urgencyLevel.toLowerCase()) {
+                case "low" -> JOptionPane.showMessageDialog(null, "Call " + i + ": This is a low priority call.");
+                case "medium" -> JOptionPane.showMessageDialog(null, "Call " + i + ": This is a medium priority call.");
+                case "high" -> JOptionPane.showMessageDialog(null, "Call " + i + ": This is a high priority call.");
+                default -> JOptionPane.showMessageDialog(null, "Call " + i + ": Invalid urgency level.");
+            }
+        }
     }
 }

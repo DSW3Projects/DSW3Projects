@@ -4,6 +4,8 @@
  */
 package com.mycompany.clasesdesarrollo;
 
+import javax.swing.JOptionPane;
+
 public class FinalcialAdvisor extends HalfTime {
     public FinalcialAdvisor(String name, String id, double baseSalary, int hoursWorked) {
         super(name, id, baseSalary, hoursWorked);
@@ -17,7 +19,11 @@ public class FinalcialAdvisor extends HalfTime {
         
     }
 
-    public void prepareFinancialReports() {
-        
+    public static void prepareFinancialReports() {
+        double revenue = Double.parseDouble(JOptionPane.showInputDialog("Enter total revenue:"));
+        double expenses = Double.parseDouble(JOptionPane.showInputDialog("Enter total expenses:"));
+        double profit = revenue - expenses;
+        JOptionPane.showMessageDialog(null, "Profit: $" + profit);
     }
+
 }

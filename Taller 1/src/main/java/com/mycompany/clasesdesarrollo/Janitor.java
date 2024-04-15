@@ -4,10 +4,20 @@
  */
 package com.mycompany.clasesdesarrollo;
 
-/**
- *
- * @author Joaquin
- */
-public class Janitor {
-    
+public class Janitor extends HalfTime {
+    public Janitor(String name, String id, double baseSalary, int hoursWorked) {
+        super(name, id, baseSalary, hoursWorked);
+    }
+
+    public void cleanAisles() {
+        
+    }
+
+    public void collectGarbage() {
+        
+    }
+
+    public void removeLitter() {
+        
+    }
 }

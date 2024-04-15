@@ -4,6 +4,8 @@
  */
 package com.mycompany.clasesdesarrollo;
 
+import javax.swing.JOptionPane;
+
 public class Secretary extends FullTime {
     private String agenda;
 
@@ -12,12 +14,19 @@ public class Secretary extends FullTime {
         this.agenda = agenda;
     }
 
-    public void manageAgenda() {
+    public static void manageAgenda() {
         
     }
 
-    public void writeCorrespondence() {
-        
+    public static void writeCorrespondence() {
+        String recipient = JOptionPane.showInputDialog("Enter the recipient's name:");
+        String subject = JOptionPane.showInputDialog("Enter the subject:");
+        String message = JOptionPane.showInputDialog("Enter the message:");
+        JOptionPane.showMessageDialog(null, """
+                                            The correspondence has been written:
+                                            Recipient: """ + recipient + "\n" +
+                                            "Subject: " + subject + "\n" +
+                                            "Message: " + message);
     }
 
     public void organizeDocuments() {

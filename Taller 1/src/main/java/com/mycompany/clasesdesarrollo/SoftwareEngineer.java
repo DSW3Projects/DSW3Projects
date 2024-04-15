@@ -4,13 +4,17 @@
  */
 package com.mycompany.clasesdesarrollo;
 
+import javax.swing.JOptionPane;
+
 public class SoftwareEngineer extends FullTime {
     public SoftwareEngineer(String name, String id, double baseSalary, int hoursWorked) {
         super(name, id, baseSalary, hoursWorked);
     }
     
-    public void developSoftware() {
-        
+     public static void developSoftware() {
+        String ide = JOptionPane.showInputDialog("Please indicate the IDE used by the Software Engineer: ");
+        String repository = JOptionPane.showInputDialog("The repository too: ");
+        JOptionPane.showMessageDialog(null, "IDE: " + ide + "\nRepository: " + repository);
     }
 
     public void makeTest() {
