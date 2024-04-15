@@ -247,41 +247,66 @@ public class Menu extends javax.swing.JFrame {
         switch (seleccion) {
             case "Manager" -> {
                 // Si se selecciona "Tiempo Completo", agregar las siguientes opciones al JComboBox2
+                
+                jComboBox3.addItem("requestVacation");
+                jComboBox3.addItem("registerAssitant");
+                jComboBox3.addItem("reciveBonus");
                 jComboBox3.addItem("assignTask");
                 jComboBox3.addItem("manageTeam");
                 jComboBox3.addItem("makeReport");
             }
             case "Secretary" -> {
+                jComboBox3.addItem("requestVacation");
+                jComboBox3.addItem("registerAssitant");
+                jComboBox3.addItem("reciveBonus");
                 jComboBox3.addItem("manageAgenda");
                 jComboBox3.addItem("writeCorrespondence");
                 jComboBox3.addItem("organizeDocuments");
             }
             case "SupportTechnician" -> {
+                jComboBox3.addItem("requestVacation");
+                jComboBox3.addItem("registerAssitant");
+                jComboBox3.addItem("reciveBonus");
                 jComboBox3.addItem("solveIncidents");
                 jComboBox3.addItem("softwareUpdate");
                 jComboBox3.addItem("provideAdvice");
             }
             case "SoftwareEngineer" -> {
+                jComboBox3.addItem("requestVacation");
+                jComboBox3.addItem("registerAssitant");
+                jComboBox3.addItem("reciveBonus");
                 jComboBox3.addItem("developSoftware");
                 jComboBox3.addItem("makeTest");
                 jComboBox3.addItem("mantainSystems");
             }
             case "AdministrativeAssistant" -> {
+                jComboBox3.addItem("requestPermision");
+                jComboBox3.addItem("organizeInvetory");
+                jComboBox3.addItem("attendCostumer");
                 jComboBox3.addItem("manageDocumentation");
                 jComboBox3.addItem("coodinateMeetings");
                 jComboBox3.addItem("takeCalls");
             }
             case "DataAnalizer" -> {
+                jComboBox3.addItem("requestPermision");
+                jComboBox3.addItem("organizeInvetory");
+                jComboBox3.addItem("attendCostumer");
                 jComboBox3.addItem("analizeData");
                 jComboBox3.addItem("generateAnalisisReports");
                 jComboBox3.addItem("developPredictiveMethods");
             }
             case "FinancialAdvisor" -> {
+                jComboBox3.addItem("requestPermision");
+                jComboBox3.addItem("organizeInvetory");
+                jComboBox3.addItem("attendCostumer");
                 jComboBox3.addItem("adviceCostumers");
                 jComboBox3.addItem("makeMarketAnalisis");
                 jComboBox3.addItem("prepareFinancialReports");
             }
             case "GraphicDesigner" -> {
+                jComboBox3.addItem("requestPermision");
+                jComboBox3.addItem("organizeInvetory");
+                jComboBox3.addItem("attendCostumer");
                 jComboBox3.addItem("designVisualMaterial");
                 jComboBox3.addItem("creativeProjectColaboration");
                 jComboBox3.addItem("submitProposals");

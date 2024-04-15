@@ -16,9 +16,9 @@ public class FullTime extends Employees {
 
     public void requestVacation(String name) {
      this.name = name;   
-    String startDate = JOptionPane.showInputDialog(null, "Ingrese la fecha de inicio de sus vacaciones (DD/MM/AAAA):");   
-    String endDate = JOptionPane.showInputDialog(null, "Ingrese la fecha de finalización de sus vacaciones (DD/MM/AAAA):");
-    JOptionPane.showMessageDialog(null, "Solicitud de vacaciones enviada para " + name + " del " + startDate + " al " + endDate + ".");
+    String startDate = JOptionPane.showInputDialog(null, "Enter the initial date for vacation in this format (DD/MM/AAAA):");   
+    String endDate = JOptionPane.showInputDialog(null, "Enter the final date for vacation in this format (DD/MM/AAAA):");
+    JOptionPane.showMessageDialog(null, "Vacation request by  " + name + " from " + startDate + " to " + endDate + ".");
         
     }
 
