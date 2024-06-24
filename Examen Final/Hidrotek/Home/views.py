@@ -51,6 +51,9 @@ def products(request, category_name=None):
 def services(request):
     return render(request, 'services.html', {})
 
+def contact(request):
+    return render(request, 'contact.html', {})
+
 def category(request, foo):
     foo = foo.replace('-', ' ')
     try:
