@@ -8,7 +8,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm
 from django import forms
 from django.http import JsonResponse
-
+from io import BytesIO
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from Home.models import Product
@@ -172,3 +172,126 @@ def register_user(request):
     else:
         return render(request, 'register.html', {'form':form})
     
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse
+from django.template.loader import get_template
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.core.mail import EmailMessage
+from django.conf import settings
+from .models import Product, Category, Cart, CartItem
+import os
+import tempfile
+from xhtml2pdf import pisa
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.base import MIMEBase
+from email import encoders
+
+
+@login_required
+def procesar_formulario(request):
+    # Obtener el carrito del usuario actual
+    try:
+        user_cart = Cart.objects.get(user=request.user)
+    except Cart.DoesNotExist:
+        return HttpResponse('No se encontró el carrito del usuario.')
+
+    # Obtener los productos en el carrito
+    cart_items = user_cart.cartitem_set.all()
+    
+    # Obtener el total del carrito
+    total = user_cart.total
+    for item in cart_items:
+        item.subtotal = item.quantity * item.product.price
+    # Obtener otros datos del cliente (por ejemplo, nombre y correo electrónico)
+    nombre_cliente = request.user.get_full_name()
+    email_cliente = request.user.email
+    fecha_validez = '30 días'  # Define la validez de la cotización según tu negocio
+
+    pdf_content = generar_pdf(nombre_cliente, email_cliente, fecha_validez,total,cart_items)
+        
+        # Si se generó correctamente el PDF
+    if pdf_content:
+            # Crear un archivo temporal para guardar el PDF
+            with tempfile.NamedTemporaryFile(delete=False, suffix='.pdf') as temp_pdf:
+                temp_pdf.write(pdf_content)
+                temp_pdf_path = temp_pdf.name
+
+            # Enviar el PDF adjunto por correo electrónico
+            if enviar_email(email_cliente, temp_pdf_path):
+                # Eliminar el archivo temporal después de enviar el correo
+                os.unlink(temp_pdf_path)
+                return HttpResponse('El PDF ha sido enviado por correo electrónico.')
+            else:
+                return HttpResponse('Error al enviar el correo electrónico.')
+    else:
+            return HttpResponse('Error al generar el PDF')
+
+
+   
+def generar_pdf(nombre_cliente, email_cliente, fecha_validez,total,cart_items):
+    # Ruta de la plantilla HTML para la cotización
+    template_path = 'cotizacion.html'
+
+    # Cargar la plantilla HTML
+    template = get_template(template_path)
+
+    # Contexto de los datos para la cotización
+    context = {
+        'items': cart_items,
+        'total': total,
+        'nombre_cliente': nombre_cliente,
+        'email_cliente': email_cliente,
+        'fecha_validez': fecha_validez,
+    }
+
+    # Renderizar la plantilla HTML con el contexto
+    html = template.render(context)
+
+    # Convertir HTML a PDF
+    pdf_file = BytesIO()
+    pisa_status = pisa.CreatePDF(html.encode('UTF-8'), dest=pdf_file)
+
+    if not pisa_status.err:
+        pdf_file.seek(0)
+        return pdf_file.read()
+    else:
+        return None
+
+def enviar_email(destinatario, archivo_adjunto):
+    # Configurar los detalles del servidor SMTP
+    smtp_server = 'smtp.gmail.com'
+    smtp_port = 587  # Puerto SMTP (usualmente 587 o 465 para SSL)
+    smtp_user = 'joaquin.castilloh12@gmail.com'  # Correo electrónico del remitente
+    smtp_password = 'nvse itqb miil tasu'  # Contraseña del correo electrónico del remitent
+
+    # Configurar el mensaje de correo electrónico
+    subject = 'Cotización adjunta'
+    body = 'Adjunto encontrarás la cotización solicitada.'
+    sender_email = smtp_user
+    receiver_email = destinatario
+
+    message = MIMEMultipart()
+    message['From'] = sender_email
+    message['To'] = receiver_email
+    message['Subject'] = subject
+
+    # Adjuntar el archivo PDF al mensaje de correo electrónico
+    with open(archivo_adjunto, 'rb') as file:
+        part = MIMEBase('application', 'octet-stream')
+        part.set_payload(file.read())
+        encoders.encode_base64(part)
+        part.add_header('Content-Disposition', f'attachment; filename= {os.path.basename(archivo_adjunto)}')
+        message.attach(part)
+
+    # Establecer la conexión con el servidor SMTP y enviar el correo electrónico
+    try:
+        with smtplib.SMTP(smtp_server, smtp_port) as server:
+            server.starttls()
+            server.login(smtp_user, smtp_password)
+            server.send_message(message)
+        return True
+    except Exception as e:
+        print("Error al enviar el correo electrónico:", str(e))
+        return False
