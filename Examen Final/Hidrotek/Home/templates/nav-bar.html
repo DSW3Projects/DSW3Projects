@@ -49,7 +49,6 @@
         <a href="{% url 'home' %}" class="block px-4 py-2 hover:bg-gray-200">Inicio</a>
         <a href="{% url 'products' %}" class="block px-4 py-2 hover:bg-gray-200">Productos</a>
         <a href="{% url 'services' %}" class="block px-4 py-2 hover:bg-gray-200">Servicios</a>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-200">Cotizaciones</a>
         <a href="{% url 'contact' %}" class="block px-4 py-2 hover:bg-gray-200">Contacto</a>
         {% if user.is_authenticated %}
         <a href="{% url 'logout' %}" class="block px-4 py-2 bg-blue-600 text-white rounded my-2 mx-4">Logout</a>
